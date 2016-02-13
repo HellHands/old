@@ -29,6 +29,7 @@
 
 	Router::connect('/', array('controller' => 'home', 'action' => 'semishsdashboard'));
 	
+	
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */

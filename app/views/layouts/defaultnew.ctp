@@ -11,7 +11,7 @@
 	?>
 			
 	<!-- TITLE -->
-	<title> <?php echo $title; ?> </title>
+	<title> <?php echo $title_for_layout; ?> </title>
             
 	<!--=========Stylesheets=========-->
 	<?= $this->Html->css('/css/bootstrap-datetimepicker.min.css'); ?>

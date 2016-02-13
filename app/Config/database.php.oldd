@@ -5,10 +5,9 @@ class DATABASE_CONFIG {
 		//'driver'     => 'mysql',
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
-		'host'       => 'consoltest.db.11382832.hostedresource.com',
-		//'host'       => 'localhost',
-		'login'      => 'consoltest',
-		'password'   => 'Consol@32user',
+		'host'       => 'localhost',
+		'login'      => 'pallu',
+		'password'   => 'mahesh',
 		'database'   => 'consoltest'
 	);
 }

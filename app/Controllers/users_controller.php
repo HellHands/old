@@ -20,6 +20,7 @@ class UsersController extends AppController {
 	    $this->Auth->allow(array('login','logout'));
 		$this->layout = 'defaultnew';
 
+
 		if ($this->Session->read('Auth.User'))
 		{
 			$this->set('logout','loggedin');
@@ -59,7 +60,8 @@ class UsersController extends AppController {
 	        if ($this->Auth->login()) 
 	        {	        	
 				$this->Session->setFlash('You\'re logged in!');
-				$this->redirect($this->Auth->redirect());
+				$this->redirect('../home/index', null, false);
+				//$this->redirect($this->Auth->redirect());
 	        }
 	        
 	        $this->Session->setFlash('Invalid username or password, try again!');

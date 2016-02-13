@@ -1,5 +1,5 @@
 <div class="users form">
-<form id="UserEditForm" method="post" action="/users/edit" accept-charset="utf-8">
+<form id="UserEditForm" method="post" action="<?= $this->webroot.'users/edit'; ?>" accept-charset="utf-8">
 	<div style="display:none;"><input type="hidden" name="_method" value="PUT"></div>	
 	<fieldset>
  	<legend>Change Password</legend>
