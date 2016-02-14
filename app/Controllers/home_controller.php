@@ -28,7 +28,7 @@ class HomeController extends AppController
 	var $paginate   = array('limit' => 200);
 	
 	var $components = array('Acl', 'Auth', 'Session','RequestHandler');
-	var $helpers    = array('Html','Form','js','Number','Javascript','Js' => array('Jquery'));
+	var $helpers    = array('Html','Form', 'Js', 'Number', 'Js' => array('Jquery'));
 	
 	function beforeFilter() {
 		
@@ -150,8 +150,9 @@ class HomeController extends AppController
 		}
 
 		if($usadmin == 6){
-			$uname = $this->Auth->user('username');
-			$uid = $this->Auth->user('id');
+			
+			$uname = $this->Session->read('Auth.User.username');
+			$uid   = $this->Session->read('Auth.User.id');
 			$district_ids = $this->codes_for_districts->find(
 			'list', array(
 				'fields' => array(
@@ -183,10 +184,10 @@ class HomeController extends AppController
 
 			//$this->render('../monitoringforms201516/index');
 			//$this->redirect('/monitoringforms201516/index');
-		}else
-		{	
+		}else{	
 			$this->redirect('../home/semishsdashboard/'.$action);
 		}
+
 		
 		// if($usadmin == 2)
 		// {
@@ -14684,6 +14685,9 @@ class HomeController extends AppController
 	function semishsdashboard($action = 'nothing')
 	{
 		$usadmin = $this->Auth->user('superuser');
+		if($usadmin == 6){
+			$this->redirect('../home/index');
+		}
 
 		$this->set('usadmin', $usadmin);
 		if($usadmin == 6){

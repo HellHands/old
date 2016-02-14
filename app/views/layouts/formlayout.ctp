@@ -93,12 +93,12 @@
 
     <script>
     	//global variables!
-    	var tehsils_url = window.location.protocol + "//" + window.location.host + '/home/get_tehsils/';
-		var ucs_url = window.location.protocol + "//" + window.location.host + '/home/get_ucs/';
+		var tehsils_url  = window.location.protocol + "//" + window.location.host + '/home/get_tehsils/';
+		var ucs_url      = window.location.protocol + "//" + window.location.host + '/home/get_ucs/';
 		var statuses_url = window.location.protocol + "//" + window.location.host + '/home/get_statuses/';
 		
 		var username = '<?php echo $username; ?>';
-		var uid = <?php echo $uid; ?>;
+		var uid      = <?php echo $uid; ?>;
 
 		var govtmale;
 		var govtfemale;
@@ -116,10 +116,10 @@
 		
 		function get_total_teachers()
 		{
-			govtmale = parseInt($('#mnformGovtMale').val());
-			govtfemale = parseInt($('#mnformGovtFemale').val());
-			nongovtmale = parseInt($('#mnformNongovtMale').val());
-			nongovtfemale = parseInt($('#mnformNongovtFemale').val());
+			govtmale       = parseInt($('#mnformGovtMale').val());
+			govtfemale     = parseInt($('#mnformGovtFemale').val());
+			nongovtmale    = parseInt($('#mnformNongovtMale').val());
+			nongovtfemale  = parseInt($('#mnformNongovtFemale').val());
 			total_teachers = (govtmale+govtfemale+nongovtmale+nongovtfemale);
 
 			return total_teachers;
@@ -127,8 +127,8 @@
 
 		function get_total_nonteachers()
 		{
-			male = parseInt($('#mnformNonteachingMale').val());
-			female = parseInt($('#mnformNonteachingFemale').val());
+			male              = parseInt($('#mnformNonteachingMale').val());
+			female            = parseInt($('#mnformNonteachingFemale').val());
 			total_nonteachers = (male+female);
 
 			return total_nonteachers;
@@ -149,22 +149,54 @@
 
 
 
-		$('#mnformHeadcountTeachingstaff').keyup(function(){
-			var total_teachers = get_total_teachers();
-			var teachers_headcount = get_teachers_headcount();
+		$('#mnformHeadcountTeachingstaff').keyup(function(e){
+			var total_teachers     = get_total_teachers();
+			var teachers_headcount = get_teachers_headcount();			
 
 			if(total_teachers < teachers_headcount){
+				e.preventDefault();
 				alert('Error!, Teachers Headcount should be less than total teachers!');
+				$('#mnformHeadcountTeachingstaff').val('');
+			}
+		});
+
+		$('#mnformHeadcountTeachingstaff').keydown(function(e){
+			var total_teachers     = get_total_teachers();
+			var teachers_headcount = get_teachers_headcount();			
+
+			var keyCode = e.keyCode || e.which;
+			if(keyCode === 9){
+				if(total_teachers < teachers_headcount){
+					e.preventDefault();
+					alert('Error!, Teachers Headcount should be less than total teachers!');
+					$('#mnformHeadcountTeachingstaff').val('');
+				}	
 			}
 
 		});
 
 		$('#mnformHeadcountNonteachingstaff').keyup(function(){
-			var total_nonteachers = get_total_nonteachers();
+			var total_nonteachers     = get_total_nonteachers();
 			var nonteachers_headcount = get_nonteachers_headcount();
 
 			if(total_nonteachers < nonteachers_headcount){
 				alert('Error!, NonTeachers Headcount should be less than total NonTeachers!');
+				$('#mnformHeadcountNonteachingstaff').val('');
+			}
+
+		});
+
+		$('#mnformHeadcountNonteachingstaff').keydown(function(e){
+			var total_teachers     = get_total_teachers();
+			var teachers_headcount = get_teachers_headcount();			
+
+			var keyCode = e.keyCode || e.which;
+			if(keyCode === 9){
+				if(total_teachers < teachers_headcount){
+					e.preventDefault();
+					alert('Error!, Teachers Headcount should be less than total teachers!');
+					$('#mnformHeadcountNonteachingstaff').val('');
+				}	
 			}
 
 		});
@@ -216,7 +248,8 @@
 					$("#uc_select").load(ucs_url);
 				}
 			  	//$("#tehsil_select").load('http://localhost/old/monitoring_forms201516/get_tehsils/' + $("#district_select").val());
-			  	$('#tehsil_select').prepend($('<option></option>').html('Loading...'));
+
+			  	$('#tehsil_select').prepend($('#tehsil_select option:selected').text('Loading...'));
 			  	$("#tehsil_select").load(tehsils_url + $("#district_select").val());
 			});
 
